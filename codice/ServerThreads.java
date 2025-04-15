@@ -33,7 +33,7 @@ import java.net.Socket;
                 BufferedWriter bw = new BufferedWriter(osw);
                 out = new PrintWriter(bw, true);
                 // ciclo di ricezione dal client e invio di risposta
-                out.print("Inserisci il tuo nome (END to close connection): ");
+                out.print("Scrivi HELP per aiuto (END to close connection): ");
                 out.flush();
                 while (true) {
                     char h;
@@ -45,8 +45,27 @@ import java.net.Socket;
                     }
                     if (str.equals("END"))
                         break;
-                    System.out.println("Echoing: " + str.toUpperCase());
-                    out.println("somma dei valori ASCII delle lettere del tuo nome: " + somma);
+
+                    if(str.equalsIgnoreCase("HELP")){
+                        out.println("Comandi: " +
+                                "\nricercaComune -> ricerca strutture per comune" +
+                                "\nricercaProvincia -> ricerca strutture in una provincia" +
+                                "\nricercaTipologia -> ricerca strutture in base alla tipologia" +
+                                "\nricercaStelle -> ricerca strutture in base al numero di stelle" +
+                                "\nricercaNome -> ricerca strutture per nome" +
+                                "\nricercaTelefono -> ricerca strutture per numero di telefono" +
+                                "\nricercaIndirizzo -> ricerca strutture per via/indirizzo" +
+                                "\nricercaCap -> ricerca strutture per CAP" +
+                                "\nricercaCitta -> ricerca strutture per città" +
+                                "\nricercaSiglaProvinciale -> ricerca strutture per sigla della provincia" +
+                                "\nricercaEmail -> ricerca struttura per email" +
+                                "\nricercaSitoInternet -> ricerca struttura per sito internet" +
+                                "\nricercaCodEsercizio -> ricerca struttura per codice esercizio" +
+                                "\nricercaId -> ricerca struttura per ID univoco" +
+                                "\nricercaGeografia -> ricerca struttura con coordinate geografiche (latitudine e longitudine)");
+                        break;
+                    }
+
                 }
                 // chiusura di stream e socket
                 System.out.println("EchoServer: closing...");
