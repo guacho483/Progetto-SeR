@@ -9,7 +9,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-    public class ServerThreads  implements Runnable {
+    public class ServerThreads  extends Thread {
         private BufferedReader in = null;
         private PrintWriter out = null;
         private Socket clientSocket = null;

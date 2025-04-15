@@ -109,4 +109,72 @@ public class Dati implements Serializable {
     public void setRow(double row) {
         this.row = row;
     }
+
+    public String getComune() {
+        return comune;
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public String getTipologia() {
+        return tipologia;
+    }
+
+    public String getStelle() {
+        return stelle;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public String getIndirizzo() {
+        return indirizzo;
+    }
+
+    public String getCap() {
+        return cap;
+    }
+
+    public String getCitta() {
+        return citta;
+    }
+
+    public String getSiglaProvinciale() {
+        return siglaProvinciale;
+    }
+
+    public String getIndirizzoEmail() {
+        return indirizzoEmail;
+    }
+
+    public String getIndirizzoInternet() {
+        return indirizzoInternet;
+    }
+
+    public String getCodEsercizio() {
+        return codEsercizio;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public double getLatitudine() {
+        return latitudine;
+    }
+
+    public double getLongitudine() {
+        return longitudine;
+    }
+
+    public double getRow() {
+        return row;
+    }
 }
