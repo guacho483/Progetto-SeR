@@ -18,7 +18,7 @@ public class LettoreCSVfile {
 
 
     private void leggiCSVFile() {
-        try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\USER\\Downloads\\Regione-Toscana---Strutture-ricettive.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("codice/Regione-Toscana---Strutture-ricettive.csv"))) {
             String linea;
             int nLinea = 0;
             while ((linea = br.readLine()) != null) {
