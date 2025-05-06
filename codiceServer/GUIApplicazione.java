@@ -75,7 +75,8 @@ public class GUIApplicazione extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String criterio = (String) menuRicerca.getSelectedItem();
                 String valore = inputRicerca.getText();
-                eseguiRicerca(criterio, valore);
+                new Thread(() ->{eseguiRicerca(criterio, valore);}).start();
+
             }
         });
     }
@@ -101,19 +102,20 @@ public class GUIApplicazione extends JFrame {
     }
 
     private void eseguiRicerca(String criterio, String valore) {
+        System.out.println("ciao");//debug
         if (clientSocket == null || clientSocket.isClosed()) {
             risultatiArea.append("Errore: non sei connesso al server.\n");
             return;
         }
 
         try {
-            String comando = "ricerca" + criterio + " " + valore;
+            String comando = "ricerca " + criterio + " " + valore;
             out.println(comando);
 
             String risposta;
             while ((risposta = in.readLine()) != null) {
                 if (risposta.equalsIgnoreCase("END")) {
-                    break; // Fine dei risultati
+                    break;
                 }
                 risultatiArea.append(formattaDati(risposta) + "\n");
             }
