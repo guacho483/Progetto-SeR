@@ -25,7 +25,6 @@ public class GUIApplicazione extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Pannello superiore per la connessione
         JPanel connessionePanel = new JPanel();
         connessionePanel.setLayout(new FlowLayout());
         connessionePanel.add(new JLabel("Indirizzo IP:"));
@@ -37,7 +36,6 @@ public class GUIApplicazione extends JFrame {
         connettiButton = new JButton("Connetti");
         connessionePanel.add(connettiButton);
 
-        // Pannello centrale per la ricerca
         JPanel ricercaPanel = new JPanel();
         ricercaPanel.setLayout(new FlowLayout());
         menuRicerca = new JComboBox<>(new String[]{
@@ -50,17 +48,15 @@ public class GUIApplicazione extends JFrame {
         ricercaButton = new JButton("Cerca");
         ricercaPanel.add(ricercaButton);
 
-        // Area risultati
         risultatiArea = new JTextArea(10, 50);
         risultatiArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(risultatiArea);
 
-        // Aggiunta dei pannelli al frame
         add(connessionePanel, BorderLayout.NORTH);
         add(ricercaPanel, BorderLayout.CENTER);
         add(scrollPane, BorderLayout.SOUTH);
 
-        // Eventi
+
         connettiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -102,14 +98,14 @@ public class GUIApplicazione extends JFrame {
     }
 
     private void eseguiRicerca(String criterio, String valore) {
-        System.out.println("ciao");//debug
+
         if (clientSocket == null || clientSocket.isClosed()) {
             risultatiArea.append("Errore: non sei connesso al server.\n");
             return;
         }
 
         try {
-            String comando = "ricerca " + criterio + " " + valore;
+            String comando = "ricerca" + criterio + " " + valore;
             out.println(comando);
 
             String risposta;
@@ -126,6 +122,7 @@ public class GUIApplicazione extends JFrame {
 
     private String formattaDati(String dati) {
         String[] campi = dati.split(";");
+
         return "Comune: " + campi[0] + "\n" +
                 "Provincia: " + campi[1] + "\n" +
                 "Tipologia: " + campi[2] + "\n" +
@@ -142,9 +139,8 @@ public class GUIApplicazione extends JFrame {
                 "ID: " + campi[13] + "\n" +
                 "Latitudine: " + campi[14] + "\n" +
                 "Longitudine: " + campi[15] + "\n" +
-                "Row: " + campi[16] + "\n";
+                "Riga: " + campi[16] + "\n";
     }
-
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {

@@ -37,8 +37,6 @@ public class Dati implements Serializable {
         this.indirizzoInternet = indirizzoInternet;
         this.codEsercizio = codEsercizio;
         this.id = id;
-        this.latitudine = latitudine;
-        this.longitudine = longitudine;
         this.row = row;
     }
 
@@ -176,5 +174,19 @@ public class Dati implements Serializable {
 
     public double getRow() {
         return row;
+    }
+
+    @Override
+    public String toString() {
+        String n = "----------------------\n\r";
+        n += "Dati della struttura ricercata:\n\r" +
+                "comune:" + comune + ", provincia:" + provincia +
+                ", tipologia:" + tipologia + "\n\rstelle:" + stelle +
+                ", nome:" + nome + ", telefono:" + telefono + "\n\rindirizzo:" + indirizzo +
+                ", cap:" + cap + ", citta:" + citta + ", siglaProvinciale:" + siglaProvinciale +
+                "\n\rindirizzoEmail:" + indirizzoEmail + ", indirizzoInternet:" + indirizzoInternet +
+                ", codEsercizio:" + codEsercizio + ", id:" + id;
+
+        return n + "\n\r-----------------------\n\r";
     }
 }

@@ -15,38 +15,49 @@ public class LettoreCSVfile {
         leggiCSVFile();
     }
 
+
+
     private void leggiCSVFile() {
-        try(BufferedReader br = new BufferedReader(new FileReader("Progetto-SeR\\codice\\Regione-Toscana---Strutture-ricettive.csv\""))){
+        try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\USER\\Downloads\\Regione-Toscana---Strutture-ricettive.csv"))) {
             String linea;
-            while((linea = br.readLine()) != null ){
+            int nLinea = 0;
+            while ((linea = br.readLine()) != null) {
                 String[] dataFeatures = linea.split(";");
-                Dati dati = new Dati();
-                dati.setComune(dataFeatures[0]);
-                dati.setProvincia(dataFeatures[1]);
-                dati.setTipologia(dataFeatures[2]);
-                dati.setStelle(dataFeatures[3]);
-                dati.setNome(dataFeatures[4]);
-                dati.setTelefono(dataFeatures[5]);
-                dati.setIndirizzo(dataFeatures[6]);
-                dati.setCap(dataFeatures[7]);
-                dati.setCitta(dataFeatures[8]);
-                dati.setSiglaProvinciale(dataFeatures[9]);
-                dati.setIndirizzoEmail(dataFeatures[10]);
-                dati.setIndirizzoInternet(dataFeatures[11]);
-                dati.setCodEsercizio(dataFeatures[12]);
-                dati.setId(dataFeatures[13]);
-                dati.setLatitudine(Double.parseDouble(dataFeatures[14]));
-                dati.setLongitudine(Double.parseDouble(dataFeatures[15]));
-                dati.setRow(Double.parseDouble(dataFeatures[16]));
 
-                contenutoFile.add(dati);
+                if (nLinea == 0) {
+                    nLinea++;
+                    continue;
+                }
+                try {
+                    Dati dati = new Dati();
+                    dati.setComune(dataFeatures[0]);
+                    dati.setProvincia(dataFeatures[1]);
+                    dati.setTipologia(dataFeatures[2]);
+                    dati.setStelle(dataFeatures[3]);
+                    dati.setNome(dataFeatures[4]);
+                    dati.setTelefono(dataFeatures[5]);
+                    dati.setIndirizzo(dataFeatures[6]);
+                    dati.setCap(dataFeatures[7]);
+                    dati.setCitta(dataFeatures[8]);
+                    dati.setSiglaProvinciale(dataFeatures[9]);
+                    dati.setIndirizzoEmail(dataFeatures[10]);
+                    dati.setIndirizzoInternet(dataFeatures[11]);
+                    dati.setCodEsercizio(dataFeatures[12]);
+                    dati.setId(dataFeatures[13]);
+                    dati.setRow(nLinea);
+
+                    contenutoFile.add(dati);
+                } catch (NumberFormatException nfe) {
+                    System.err.println("Errore di parsing numerico nella riga: " + linea);
+
+                }
+                nLinea++;
             }
-
-        }catch(IOException ioe){
+        } catch (IOException ioe) {
+            System.err.println("Errore durante la lettura del file CSV: " + ioe.getMessage());
             ioe.printStackTrace();
         }
     }
-
     public List<Dati> ricercaComune(String comune) {
         List<Dati> risultati = new ArrayList<>();
         for (Dati dati : contenutoFile) {
@@ -187,25 +198,6 @@ public class LettoreCSVfile {
         return risultati;
     }
 
-    public List<Dati> ricercaLatitudine(double latitudine) {
-        List<Dati> risultati = new ArrayList<>();
-        for (Dati dati : contenutoFile) {
-            if (dati.getLatitudine() == latitudine) {
-                risultati.add(dati);
-            }
-        }
-        return risultati;
-    }
-
-    public List<Dati> ricercaLongitudine(double longitudine) {
-        List<Dati> risultati = new ArrayList<>();
-        for (Dati dati : contenutoFile) {
-            if (dati.getLongitudine() == longitudine) {
-                risultati.add(dati);
-            }
-        }
-        return risultati;
-    }
 
     public List<Dati> ricercaRow(double row) {
         List<Dati> risultati = new ArrayList<>();

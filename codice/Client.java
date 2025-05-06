@@ -1,6 +1,5 @@
 package codice;
 
-
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -28,23 +27,39 @@ public class Client {
             PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
+
+            String linea;
+            while ((linea = in.readLine()) != null) {
+                if (linea.equals("END_OF_MESSAGE")) {
+                    break;
+                }
+                System.out.println(linea);
+            }
+
             String command;
             while (true) {
-                String line;
-                while ((line = in.readLine()) != null) {
-                    if (line.equals("END_OF_MESSAGE")) break;
-                    System.out.println(line);
-                }
-
                 System.out.print("> ");
                 command = input.nextLine();
 
-                if (command == null || command.equalsIgnoreCase("END")) {
+                if ( command.equalsIgnoreCase("END")) {
                     out.println("END");
+                    System.out.println("Chiusura della connessione...");
                     break;
                 }
 
+
                 out.println(command);
+                System.out.println("Messaggio inviato al server: " + command);
+
+
+                StringBuilder rispostaCompleta = new StringBuilder();
+                while ((linea = in.readLine()) != null) {
+                    if (linea.equals("END_OF_MESSAGE")) {
+                        break;
+                    }
+                    rispostaCompleta.append(linea).append("\n");
+                }
+                System.out.println(rispostaCompleta.toString());
             }
 
             out.close();
@@ -52,7 +67,7 @@ public class Client {
             socket.close();
             System.out.println("Connessione terminata!");
         } catch (IOException e) {
-            System.err.println("Errore durante la connessione al server:" + e.getMessage());
+            System.err.println("Errore durante la connessione al server: " + e.getMessage());
         } catch (NumberFormatException e) {
             System.err.println("La porta inserita non è valida.");
         }

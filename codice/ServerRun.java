@@ -18,7 +18,7 @@ public class ServerRun {
      */
 
     public static void main(String[] args) throws IOException {
-        try (ServerSocket serverSocket = new ServerSocket(PORT, 50, InetAddress.getByName(SERVER_IP))) {
+        try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             System.out.println("EchoServer: started ");
             System.out.println("Server Socket: " + serverSocket);
 
