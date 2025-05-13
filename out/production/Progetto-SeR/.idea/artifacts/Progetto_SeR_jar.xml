@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Progetto-SeR:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Progetto_SeR_jar</output-path>
+    <root id="archive" name="Progetto-SeR.jar">
+      <element id="module-output" name="Progetto-SeR" />
+    </root>
+  </artifact>
+</component>
